@@ -38,10 +38,9 @@ class App extends Component {
     }
 
     handleInputChar(value, id){
-        const text=this.state.text;
 
         if (value.length <= 1) {
-//            fetch(`http://localhost/xmas/ajax.php`,
+//            fetch(`http://localhost/sgxmas/ajax.php`,
             fetch(`https://www.seti-germany.de/xmas/ajax.php`,
             {
                 method: "POST",
@@ -60,14 +59,11 @@ class App extends Component {
     render() {
         const singleCharsList = this.state.singleChars;
         return (
-            <div className="row">
-                <header >
-                    <h1 >Welcome to Xmas</h1>
-                </header>
-                <p>
-                   Und hier nun ein Paragraph.
-                </p>
-                <form className="col s12">
+            <div className="row" style={ {marginTop: '25px'} }>
+{/*                <header >
+                    <h4>Willkommen zum 10. <img src="https://www.seti-germany.de/sgwiki/images/2/20/Logo_advent.png" alt="SG-Advent-Logo" width="200"/>-<img src="https://www.seti-germany.de/forum/attachment.php?attachmentid=5041&d=1511544775" alt="Logo 10. Adventscrunchen"/></h4>
+                </header>  */}
+                <form className="col s12" style={ {marginTop: '10px'} }>
                     { Object.keys(singleCharsList).map( key =>
                         <InputChar key={key} id={key} 
                                 value={singleCharsList[key]}
@@ -75,7 +71,13 @@ class App extends Component {
                     )}    
                 </form>
 
-                <div>{this.state.text}</div>
+                <div style={ {background: '#fff',
+                              borderRadius: '6px',
+                              boxShadow: 'inset 1px 1px 5px rgba(0, 0, 0, 0.5)',
+                              padding: '10px'} }>
+                    Lösungswort:<br/>
+                    {this.state.text}
+                </div>
             </div>
         );
     }
