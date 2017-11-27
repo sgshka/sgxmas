@@ -69,6 +69,7 @@
             $keyLow=false;
             $keyUp=array_search(strtolower($currChar),$solution);
         }
+
         if ($keyLow !== false) {
             $newText .= strtolower($solutionProposal[$keyLow]) ;
         } elseif ($keyUp !== false) {
