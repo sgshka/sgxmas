@@ -26,7 +26,7 @@
         "Denn als ich zu Haus war, da musste ich heulen:\r\n".
         "Mein schöner Wagen, der hatte drei Beulen,\r\n".
         "Vom Nikolaus, vom Christkind und vom Weihnachtsmann -\r\n".
-        "nächstes Jahr fahr ich mit der Strassenbahn!";
+        "nächstes Jahr fahr ich mit der Straßenbahn!";
 
     $solution = array(
         "c1224" => " ",
@@ -47,11 +47,11 @@
         "c1209" => "g",
         "c1208" => "k",
         "c1207" => "b",
-        "c1206" => "ä",
+        "c1206" => "ü",
         "c1205" => "w",
         "c1204" => "v",
         "c1203" => "z",
-        "c1202" => "ü",
+        "c1202" => "ä",
         "c1201" => "e"
     );
 
@@ -60,20 +60,22 @@
     $emptyProposal=false;
     $newText="";
     $export=array();
-    for($i=0; $i<strlen($text);$i++) {
-        $currChar=$text[$i];
-        if ( $currChar===strtolower($currChar) ) {
-            $keyLow=array_search(strtolower($currChar),$solution);
+    mb_internal_encoding('UTF-8');
+    for($i=0; $i<mb_strlen($text);$i++) {
+//        echo "mb_sub: ".$text[$i]."-".mb_substr($text,$i,1,"utf-8")."<br>";
+        $currChar=mb_substr($text,$i,1);
+        if ( $currChar===mb_strtolower($currChar) ) {
+            $keyLow=array_search(mb_strtolower($currChar),$solution);
             $keyUp=false;
         } else {
             $keyLow=false;
-            $keyUp=array_search(strtolower($currChar),$solution);
+            $keyUp=array_search(mb_strtolower($currChar),$solution);
         }
 
         if ($keyLow !== false) {
-            $newText .= strtolower($solutionProposal[$keyLow]) ;
+            $newText .= mb_strtolower($solutionProposal[$keyLow]) ;
         } elseif ($keyUp !== false) {
-            $newText .= strtoupper($solutionProposal[$keyUp]);
+            $newText .= mb_strtoupper($solutionProposal[$keyUp]);
         } else {
             $newText .=$currChar;
         }

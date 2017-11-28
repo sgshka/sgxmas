@@ -40,8 +40,8 @@ class App extends Component {
     handleInputChar(value, id){
 
         if (value.length <= 1) {
-//            fetch(`http://localhost/sgxmas/ajax.php`,
-            fetch(`https://www.seti-germany.de/xmas/ajax.php`,
+            fetch(`http://localhost/xmas/ajax.php`,
+//            fetch(`https://www.seti-germany.de/xmas/ajax.php`,
             {
                 method: "POST",
                 headers: {
@@ -75,8 +75,9 @@ class App extends Component {
                               borderRadius: '6px',
                               boxShadow: 'inset 1px 1px 5px rgba(0, 0, 0, 0.5)',
                               padding: '10px'} }>
-                    Lösungswort:<br/>
-                    {this.state.text}
+                    <h6>Lösungswort:</h6>
+                    <hr/>
+                    <b>{this.state.text}</b>
                 </div>
             </div>
         );
