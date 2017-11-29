@@ -38,8 +38,8 @@
         "c1218" => "s",
         "c1217" => "r",
         "c1216" => "t",
-        "c1215" => "c",
-        "c1214" => "d",
+        "c1215" => "d",
+        "c1214" => "c",
         "c1213" => "u",
         "c1212" => "m",
         "c1211" => "l",
@@ -55,14 +55,9 @@
         "c1201" => "e"
     );
 
-
-
-    $emptyProposal=false;
     $newText="";
-    $export=array();
     mb_internal_encoding('UTF-8');
     for($i=0; $i<mb_strlen($text);$i++) {
-//        echo "mb_sub: ".$text[$i]."-".mb_substr($text,$i,1,"utf-8")."<br>";
         $currChar=mb_substr($text,$i,1);
         if ( $currChar===mb_strtolower($currChar) ) {
             $keyLow=array_search(mb_strtolower($currChar),$solution);
@@ -79,7 +74,6 @@
         } else {
             $newText .=$currChar;
         }
-        $export[$i] =$newText;
     }
     echo json_encode(array('text' => $newText));
 ?>

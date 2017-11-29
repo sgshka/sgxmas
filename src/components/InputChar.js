@@ -37,8 +37,13 @@ class InputChar extends Component {
 
       render() {
         return (
-            <div className="input-field col s1">
-                <input className="center-align" type="text" id={this.props.id} value={this.props.value} onChange={this.handleChange}/>
+            <div className="input-field col s3 m2 l1">
+                <input className="center-align" 
+                       style={this.props.value.length ? {background: "url('https://www.seti-germany.de/AC2017/img/candle_on.png')",
+                                                         backgroundPosition: "left bottom",
+                                                         backgroundRepeat: "no-repeat",
+                                                         backgroundSize: "25px"} : null} 
+                       type="text" id={this.props.id} value={this.props.value} onChange={this.handleChange}/>
                 <label style={labelStyle} htmlFor={this.props.id}>{FormatLabel(this.props.id)}</label>
             </div>
         );

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import cookie               from 'react-cookie';
+
 import InputChar from './components/InputChar';
 
 class App extends Component {
@@ -39,9 +41,12 @@ class App extends Component {
 
     handleInputChar(value, id){
 
-        if (value.length <= 1) {
-            fetch(`http://localhost/xmas/ajax.php`,
-//            fetch(`https://www.seti-germany.de/xmas/ajax.php`,
+        if (value.length <= 1 && [""," ","a","b","c","d","e","f","g","h","i","j","k",
+                                  "l","m","n","o","p","q","r","s","t","u","v","w",
+                                  "x","y","z","ä","ö","ü","ß",",",".",";","-",":",
+                                  "!","?","0","1","2","3","4","5","6","7","8","9"].indexOf(value.toLowerCase()) !==-1) {
+//           fetch(`http://localhost/xmas/ajax.php`,
+            fetch(`https://www.seti-germany.de/AC2017/ajax.php`,
             {
                 method: "POST",
                 headers: {
@@ -50,9 +55,35 @@ class App extends Component {
                 body: JSON.stringify({...this.state.singleChars,[id]:value})
             })
             .then(response => response.json())
-            .then(json => this.setState( {singleChars:{...this.state.singleChars,[id]:value},text:json.text} ) );
-            console.log(this.state);
+            .then(json => this.setCookie({singleChars:{...this.state.singleChars,[id]:value},text:json.text} ) )
+            .then(json => this.setState( {singleChars:{...this.state.singleChars,[id]:value},text:json.text} ) )
+//            console.log(this.state);
         };
+    }
+
+    componentDidMount() {
+        var acCookies = cookie.select(new RegExp("sgAC"));
+        for (var singleCookie in acCookies) {
+            if (typeof(acCookies) !== "undefined") {
+                this.setState(cookie.load(singleCookie))
+            }
+        }
+//        console.log("componentDidMount");
+    }
+
+
+    setCookie(cookieContent) {
+        /* 
+        path - cookie path : Use / as the path if you want your cookie to be accessible on all pages.
+        expires - absolute expiration date for the cookie (Date object)
+        maxAge - relative max age of the cookie from when the client receives it (seconds)
+        domain - domain for the cookie: Use https://*.yourdomain.com if you want to access the cookie in all your subdomains.
+        secure - Is only accessible through HTTPS? true or false
+        httpOnly - Is only the server can access the cookie? true or false
+        */
+        
+        cookie.save('sgAC', JSON.stringify(cookieContent), { path : '/', maxAge: 30*86400 });
+        return cookieContent
     }
 
 
@@ -60,9 +91,6 @@ class App extends Component {
         const singleCharsList = this.state.singleChars;
         return (
             <div className="row" style={ {marginTop: '25px'} }>
-{/*                <header >
-                    <h4>Willkommen zum 10. <img src="https://www.seti-germany.de/sgwiki/images/2/20/Logo_advent.png" alt="SG-Advent-Logo" width="200"/>-<img src="https://www.seti-germany.de/forum/attachment.php?attachmentid=5041&d=1511544775" alt="Logo 10. Adventscrunchen"/></h4>
-                </header>  */}
                 <form className="col s12" style={ {marginTop: '10px'} }>
                     { Object.keys(singleCharsList).map( key =>
                         <InputChar key={key} id={key} 
