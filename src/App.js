@@ -46,7 +46,7 @@ class App extends Component {
                                   "x","y","z","ä","ö","ü","ß",",",".",";","-",":",
                                   "!","?","0","1","2","3","4","5","6","7","8","9"].indexOf(value.toLowerCase()) !==-1) {
 //           fetch(`http://localhost/xmas/ajax.php`,
-            fetch(`https://www.seti-germany.de/AC2017/ajax.php`,
+            fetch(`https://www.seti-germany.de/adventscrunchen/ajax.php`,
             {
                 method: "POST",
                 headers: {

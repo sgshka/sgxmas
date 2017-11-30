@@ -39,7 +39,7 @@ class InputChar extends Component {
         return (
             <div className="input-field col s3 m2 l1">
                 <input className="center-align" 
-                       style={this.props.value.length ? {background: "url('https://www.seti-germany.de/AC2017/img/candle_on.png')",
+                       style={this.props.value.length ? {background: "url('https://www.seti-germany.de/adventscrunchen/img/candle_on.png')",
                                                          backgroundPosition: "left bottom",
                                                          backgroundRepeat: "no-repeat",
                                                          backgroundSize: "25px"} : null} 
